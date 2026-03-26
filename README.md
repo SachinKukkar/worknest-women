@@ -1,4 +1,240 @@
-# 🌸 WorkNest Women — Complete Setup & Deployment Guide
+<div align="center">
+
+# 🌸 WorkNest Women
+
+### *Empowering Women Through Flexible Work Opportunities*
+
+[![Live Demo](https://img.shields.io/badge/demo-live-success?style=for-the-badge)](https://wn-women.vercel.app)
+[![License](https://img.shields.io/badge/license-MIT-blue?style=for-the-badge)](LICENSE)
+[![Node](https://img.shields.io/badge/node-%3E%3D18.0.0-brightgreen?style=for-the-badge&logo=node.js)](https://nodejs.org)
+[![MongoDB](https://img.shields.io/badge/MongoDB-Atlas-green?style=for-the-badge&logo=mongodb)](https://mongodb.com)
+
+**A full-stack platform connecting women with remote and flexible job opportunities**
+
+[🚀 Live Demo](https://wn-women.vercel.app) • [📖 Documentation](#-quick-start) • [🐛 Report Bug](https://github.com/yourusername/worknest/issues)
+
+</div>
+
+---
+
+## ✨ Features
+
+<table>
+<tr>
+<td width="50%">
+
+### 👩 For Job Seekers
+- 🎯 **Smart Job Matching** - AI-powered recommendations
+- 📝 **One-Click Applications** - Apply instantly
+- 💰 **Financial Dashboard** - Track earnings & expenses
+- 📊 **Visual Analytics** - Beautiful charts & insights
+- 🎓 **Skill Management** - Build your profile
+
+</td>
+<td width="50%">
+
+### 🏢 For Employers
+- 📢 **Post Jobs** - Create detailed listings
+- 👥 **Manage Applications** - Review candidates
+- 🎯 **Skill-Based Hiring** - Find perfect matches
+- 📈 **Dashboard Analytics** - Track metrics
+- ⚡ **Quick Responses** - Instant notifications
+
+</td>
+</tr>
+</table>
+
+---
+
+## 🎬 Quick Start
+
+### 🔥 Try It Now (No Setup Required)
+
+Visit **[wn-women.vercel.app](https://wn-women.vercel.app)** and login with:
+
+```
+👩 Woman:    priya@demo.com / demo1234
+🏢 Employer: employer@demo.com / demo1234
+🔑 Admin:    admin@worknest.com / demo1234
+```
+
+### 💻 Local Development
+
+<details>
+<summary><b>📋 Prerequisites</b></summary>
+
+- [Node.js 18+](https://nodejs.org) installed
+- [MongoDB](https://www.mongodb.com/try/download/community) running locally (or use [Atlas](https://cloud.mongodb.com))
+- Git installed
+
+</details>
+
+<details open>
+<summary><b>⚡ Installation (5 minutes)</b></summary>
+
+#### 1️⃣ Clone & Install
+
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/worknest-women.git
+cd worknest-women
+
+# Install backend dependencies
+cd backend
+npm install
+
+# Install frontend dependencies
+cd ../frontend
+npm install
+```
+
+#### 2️⃣ Configure Environment
+
+**Backend** (`backend/.env`):
+```env
+MONGO_URI=mongodb://localhost:27017/worknest
+JWT_SECRET=your_super_secret_key_change_in_production
+PORT=5000
+FRONTEND_URL=http://localhost:5173
+NODE_ENV=development
+```
+
+**Frontend** (`frontend/.env`):
+```env
+VITE_API_URL=http://localhost:5000/api
+```
+
+#### 3️⃣ Seed Database
+
+```bash
+cd backend
+npm run seed
+```
+
+You'll see demo users created! ✅
+
+#### 4️⃣ Start Development Servers
+
+```bash
+# Terminal 1 - Backend
+cd backend
+npm run dev
+
+# Terminal 2 - Frontend
+cd frontend
+npm run dev
+```
+
+#### 5️⃣ Open App
+
+Visit **http://localhost:5173** and login with demo credentials! 🎉
+
+</details>
+
+---
+
+## 🚀 Production Deployment
+
+<details>
+<summary><b>☁️ Deploy to Production (FREE - 20 minutes)</b></summary>
+
+### 📦 What You'll Need
+
+- [GitHub](https://github.com) account
+- [MongoDB Atlas](https://cloud.mongodb.com) account (FREE)
+- [Render](https://render.com) account (FREE)
+- [Vercel](https://vercel.com) account (FREE)
+
+### 🗄️ Step 1: Setup MongoDB Atlas (5 min)
+
+1. Go to [cloud.mongodb.com](https://cloud.mongodb.com)
+2. Create **FREE M0 cluster**
+3. Create database user & password
+4. Network Access → **Allow from Anywhere** (0.0.0.0/0)
+5. Get connection string:
+   ```
+   mongodb+srv://username:password@cluster.mongodb.net/worknest
+   ```
+
+### ⚙️ Step 2: Deploy Backend to Render (5 min)
+
+1. Push code to GitHub
+2. Go to [render.com](https://render.com) → **New Web Service**
+3. Connect GitHub repo
+4. Settings:
+   - **Root Directory**: `backend`
+   - **Build Command**: `npm install`
+   - **Start Command**: `node server.js`
+5. Add Environment Variables:
+   ```
+   MONGO_URI=<your_mongodb_atlas_connection_string>
+   JWT_SECRET=<generate_random_32_char_string>
+   PORT=5000
+   FRONTEND_URL=https://your-app.vercel.app
+   NODE_ENV=production
+   ```
+6. Deploy & copy your API URL
+
+### 🎨 Step 3: Deploy Frontend to Vercel (5 min)
+
+1. Go to [vercel.com](https://vercel.com) → **New Project**
+2. Import GitHub repo
+3. Settings:
+   - **Root Directory**: `frontend`
+   - **Framework**: Vite
+4. Add Environment Variable:
+   ```
+   VITE_API_URL=https://your-render-api-url.onrender.com/api
+   ```
+5. Deploy & copy your app URL
+
+### 🌱 Step 4: Seed Production Database (2 min)
+
+**Option 1: PowerShell**
+```powershell
+Invoke-WebRequest -Uri "https://your-api.onrender.com/api/seed/init" -Method POST
+```
+
+**Option 2: Browser**
+- Use the included `seed-database.html` file
+- Or visit [reqbin.com](https://reqbin.com) and POST to `/api/seed/init`
+
+### ✅ Step 5: Update CORS (2 min)
+
+1. Go back to Render dashboard
+2. Update `FRONTEND_URL` with your Vercel URL
+3. Redeploy
+
+### 🎉 Done!
+
+Your app is live at your Vercel URL! 🚀
+
+</details>
+
+---
+
+## 🛠️ Tech Stack
+
+<div align="center">
+
+### Frontend
+![React](https://img.shields.io/badge/React-18-61DAFB?style=for-the-badge&logo=react&logoColor=black)
+![Vite](https://img.shields.io/badge/Vite-5-646CFF?style=for-the-badge&logo=vite&logoColor=white)
+![TailwindCSS](https://img.shields.io/badge/Tailwind-3-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![Recharts](https://img.shields.io/badge/Recharts-2-8884D8?style=for-the-badge)
+
+### Backend
+![Node.js](https://img.shields.io/badge/Node.js-18-339933?style=for-the-badge&logo=node.js&logoColor=white)
+![Express](https://img.shields.io/badge/Express-4-000000?style=for-the-badge&logo=express&logoColor=white)
+![MongoDB](https://img.shields.io/badge/MongoDB-7-47A248?style=for-the-badge&logo=mongodb&logoColor=white)
+![JWT](https://img.shields.io/badge/JWT-Auth-000000?style=for-the-badge&logo=json-web-tokens&logoColor=white)
+
+### Deployment
+![Vercel](https://img.shields.io/badge/Vercel-Frontend-000000?style=for-the-badge&logo=vercel&logoColor=white)
+![Render](https://img.shields.io/badge/Render-Backend-46E3B7?style=for-the-badge&logo=render&logoColor=white)
+![MongoDB Atlas](https://img.shields.io/badge/Atlas-Database-47A248?style=for-the-badge&logo=mongodb&logoColor=white)
+
+</div>
 
 ---
 
@@ -6,432 +242,240 @@
 
 ```
 worknest/
-├── backend/
-│   ├── server.js
-│   ├── package.json
-│   ├── .env.example
-│   ├── models/
-│   │   ├── User.js
-│   │   ├── Skill.js
-│   │   ├── Job.js
-│   │   ├── Application.js
-│   │   └── Transaction.js
-│   ├── controllers/
-│   │   ├── authController.js
-│   │   ├── userController.js
-│   │   ├── jobController.js
-│   │   ├── applicationController.js
-│   │   ├── transactionController.js
-│   │   └── skillController.js
-│   ├── routes/
-│   │   ├── auth.js
-│   │   ├── users.js
-│   │   ├── jobs.js
-│   │   ├── applications.js
-│   │   ├── transactions.js
-│   │   └── skills.js
-│   ├── middleware/
-│   │   ├── auth.js
-│   │   └── errorHandler.js
-│   └── seed/
-│       └── seed.js
-└── frontend/
-    ├── index.html
-    ├── vite.config.js
-    ├── tailwind.config.js
-    ├── postcss.config.js
-    ├── package.json
-    └── src/
-        ├── main.jsx
-        ├── App.jsx
-        ├── index.css
-        ├── context/
-        │   └── AuthContext.jsx
-        ├── services/
-        │   └── api.js
-        ├── components/
-        │   └── layout/
-        │       └── Layout.jsx
-        └── pages/
-            ├── Landing.jsx
-            ├── Login.jsx
-            ├── Register.jsx
-            ├── Dashboard.jsx
-            ├── SkillSelection.jsx
-            ├── Jobs.jsx
-            ├── JobDetail.jsx
-            ├── Applications.jsx
-            ├── FinancialDashboard.jsx
-            └── Profile.jsx
+├── 📂 backend/              # Node.js + Express API
+│   ├── 📂 controllers/      # Business logic
+│   ├── 📂 models/          # MongoDB schemas
+│   ├── 📂 routes/          # API endpoints
+│   ├── 📂 middleware/      # Auth & validation
+│   ├── 📂 seed/            # Demo data
+│   └── 📄 server.js        # Entry point
+│
+├── 📂 frontend/            # React + Vite app
+│   ├── 📂 src/
+│   │   ├── 📂 components/  # Reusable UI
+│   │   ├── 📂 pages/       # Route pages
+│   │   ├── 📂 context/     # Global state
+│   │   ├── 📂 services/    # API calls
+│   │   └── 📄 App.jsx      # Main component
+│   └── 📄 index.html       # Entry HTML
+│
+├── 📄 README.md            # You are here!
+├── 📄 LICENSE              # MIT License
+└── 📄 .gitignore           # Git ignore rules
 ```
 
 ---
 
-## 🚀 LOCAL SETUP (Step by Step)
+## 🔐 Security Features
 
-### Prerequisites
-- Node.js v18+ → https://nodejs.org
-- MongoDB Community → https://www.mongodb.com/try/download/community
-  OR use MongoDB Atlas (free cloud, recommended)
+<table>
+<tr>
+<td>
 
----
+✅ **Password Security**
+- Bcrypt hashing (10 rounds)
+- Salted passwords
 
-### Step 1 — Clone / create the project folder
+✅ **Authentication**
+- JWT tokens (7-day expiry)
+- Secure HTTP-only cookies
 
-```bash
-# Place all files as shown in the structure above
-# Then navigate to the project root:
-cd worknest
-```
+✅ **Authorization**
+- Role-based access control
+- Protected API routes
 
----
+</td>
+<td>
 
-### Step 2 — Backend Setup
+✅ **API Protection**
+- Rate limiting (100 req/15min)
+- Helmet.js security headers
+- CORS configuration
 
-```bash
-cd backend
+✅ **Data Validation**
+- Input sanitization
+- XSS protection
+- SQL injection prevention
 
-# Copy env file
-cp .env.example .env
-```
-
-Edit `.env`:
-```env
-MONGO_URI=mongodb://localhost:27017/worknest
-JWT_SECRET=worknest_super_secret_key_2024_change_in_prod
-PORT=5000
-FRONTEND_URL=http://localhost:5173
-NODE_ENV=development
-```
-
-```bash
-# Install dependencies
-npm install
-
-# Seed the database with demo data
-npm run seed
-```
-
-You'll see:
-```
-✅ Connected to MongoDB
-🗑️  Cleared old data
-✅ Seeded 15 skills
-✅ Created demo users
-✅ Seeded 8 jobs
-✅ Created demo applications
-✅ Seeded transactions
-🎉 Seed complete! Demo credentials:
-   👩 Woman    → priya@demo.com     / demo1234
-   🏢 Employer → employer@demo.com  / demo1234
-   🔑 Admin    → admin@worknest.com / demo1234
-```
-
-```bash
-# Start backend server
-npm run dev
-# → Server running on http://localhost:5000
-```
+</td>
+</tr>
+</table>
 
 ---
 
-### Step 3 — Frontend Setup
+## 📊 API Endpoints
 
-Open a new terminal:
-```bash
-cd frontend
+<details>
+<summary><b>🔓 Authentication</b></summary>
 
-# Install dependencies
-npm install
-
-# Start dev server
-npm run dev
-# → App running on http://localhost:5173
-```
-
----
-
-### Step 4 — Open the App
-
-1. Go to http://localhost:5173
-2. Click **"Get Started"**
-3. Use demo login: **priya@demo.com / demo1234**
-
----
-
-## 🎯 Demo Flow
-
-```
-1. Register (or login as priya@demo.com / demo1234)
-      ↓
-2. Select Skills (SkillSelection page)
-      ↓
-3. Browse Jobs → Apply with cover letter
-      ↓
-4. Check My Applications → see status
-      ↓
-5. View Financial Dashboard → charts with seed data
-      ↓
-6. Update Profile
-```
-
----
-
-## 🌐 API Reference
-
-### Auth
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| POST | /api/auth/register | Register user |
-| POST | /api/auth/login | Login |
-| GET | /api/auth/me | Get current user |
+| `POST` | `/api/auth/register` | Register new user |
+| `POST` | `/api/auth/login` | Login user |
+| `GET` | `/api/auth/me` | Get current user |
 
-### Jobs
+</details>
+
+<details>
+<summary><b>💼 Jobs</b></summary>
+
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| GET | /api/jobs | List all jobs (supports ?search=, ?type=, ?category=) |
-| GET | /api/jobs/:id | Get job detail |
-| GET | /api/jobs/recommended | Skill-matched jobs (auth required) |
-| POST | /api/jobs | Create job (employer/admin only) |
+| `GET` | `/api/jobs` | List all jobs |
+| `GET` | `/api/jobs/:id` | Get job details |
+| `GET` | `/api/jobs/recommended` | Get matched jobs |
+| `POST` | `/api/jobs` | Create job (employer) |
 
-### Applications
+</details>
+
+<details>
+<summary><b>📝 Applications</b></summary>
+
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| POST | /api/applications | Apply for a job |
-| GET | /api/applications/my | My applications |
-| PUT | /api/applications/:id/status | Update status (employer/admin) |
+| `POST` | `/api/applications` | Apply for job |
+| `GET` | `/api/applications/my` | My applications |
+| `PUT` | `/api/applications/:id/status` | Update status |
 
-### Users
+</details>
+
+<details>
+<summary><b>👤 Users</b></summary>
+
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| PUT | /api/users/profile | Update profile |
-| POST | /api/users/skills | Add skills |
-| GET | /api/users/dashboard | Dashboard stats |
+| `PUT` | `/api/users/profile` | Update profile |
+| `POST` | `/api/users/skills` | Add skills |
+| `GET` | `/api/users/dashboard` | Dashboard stats |
 
-### Transactions
+</details>
+
+<details>
+<summary><b>💰 Transactions</b></summary>
+
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| GET | /api/transactions | List transactions |
-| POST | /api/transactions | Add transaction |
-| GET | /api/transactions/summary | Financial summary + charts |
+| `GET` | `/api/transactions` | List transactions |
+| `POST` | `/api/transactions` | Add transaction |
+| `GET` | `/api/transactions/summary` | Financial summary |
 
-### Skills
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | /api/skills | All skills |
+</details>
 
 ---
 
-## 🧪 Postman Testing
+## 🎯 User Roles & Permissions
 
-Import these requests into Postman:
-
-**1. Register**
-```
-POST http://localhost:5000/api/auth/register
-Body (JSON):
-{
-  "name": "Test User",
-  "email": "test@test.com",
-  "password": "test123",
-  "role": "woman"
-}
-```
-
-**2. Login**
-```
-POST http://localhost:5000/api/auth/login
-Body (JSON):
-{
-  "email": "priya@demo.com",
-  "password": "demo1234"
-}
-→ Copy the token from response
-```
-
-**3. Get Jobs (public)**
-```
-GET http://localhost:5000/api/jobs
-GET http://localhost:5000/api/jobs?type=remote
-GET http://localhost:5000/api/jobs?search=design
-```
-
-**4. Apply for Job (requires token)**
-```
-POST http://localhost:5000/api/applications
-Headers: Authorization: Bearer <your_token>
-Body (JSON):
-{
-  "jobId": "<job_id_from_jobs_list>",
-  "coverLetter": "I am interested in this role..."
-}
-```
-
-**5. Financial Summary (requires token)**
-```
-GET http://localhost:5000/api/transactions/summary
-Headers: Authorization: Bearer <your_token>
-```
+| Feature | 👩 Woman | 🏢 Employer | 🔑 Admin |
+|---------|:--------:|:-----------:|:--------:|
+| Browse Jobs | ✅ | ✅ | ✅ |
+| Apply for Jobs | ✅ | ❌ | ✅ |
+| Post Jobs | ❌ | ✅ | ✅ |
+| Manage Applications | ❌ | ✅ | ✅ |
+| Financial Dashboard | ✅ | ✅ | ✅ |
+| Create Skills | ❌ | ❌ | ✅ |
 
 ---
 
-## ☁️ DEPLOYMENT GUIDE
+## 🐛 Troubleshooting
 
-### 🗄️ Step 1 — MongoDB Atlas (Database)
+<details>
+<summary><b>❌ MongoDB Connection Failed</b></summary>
 
-1. Go to https://cloud.mongodb.com
-2. Create free account → "Build a Database" → Free M0 tier
-3. Set username + password (save these!)
-4. Under "Network Access" → Add IP → "Allow Access from Anywhere" (0.0.0.0/0)
-5. Under "Database" → Connect → "Drivers" → Copy connection string:
-   ```
-   mongodb+srv://USERNAME:PASSWORD@cluster0.xxxxx.mongodb.net/worknest?retryWrites=true&w=majority
-   ```
-6. Run seed against Atlas:
-   ```bash
-   # In backend/.env, set:
-   MONGO_URI=mongodb+srv://...
-   # Then:
-   npm run seed
-   ```
-
----
-
-### ⚙️ Step 2 — Backend on Render
-
-1. Push your code to GitHub
-2. Go to https://render.com → New → Web Service
-3. Connect your GitHub repo, select the `backend` folder as root
-4. Settings:
-   - **Name**: worknest-api
-   - **Build Command**: `npm install`
-   - **Start Command**: `node server.js`
-   - **Plan**: Free
-5. Under **Environment Variables**, add:
-   ```
-   MONGO_URI = mongodb+srv://...
-   JWT_SECRET = your_random_secret_32chars
-   PORT = 5000
-   FRONTEND_URL = https://your-frontend.vercel.app
-   NODE_ENV = production
-   ```
-6. Click **Create Web Service**
-7. Copy your API URL: `https://worknest-api.onrender.com`
-
----
-
-### 🎨 Step 3 — Frontend on Vercel
-
-1. Go to https://vercel.com → New Project
-2. Import your GitHub repo, set Root Directory to `frontend`
-3. Settings:
-   - **Framework Preset**: Vite
-   - **Build Command**: `npm run build`
-   - **Output Dir**: `dist`
-4. Under **Environment Variables**, add:
-   ```
-   VITE_API_URL = https://worknest-api.onrender.com/api
-   ```
-5. Click **Deploy**
-6. Copy your URL: `https://worknest-women.vercel.app`
-
----
-
-### Step 4 — Update CORS
-
-In Render dashboard, update `FRONTEND_URL` to your Vercel URL.
-Redeploy the backend.
-
----
-
-## 🔐 Security Checklist
-
-- [x] Passwords hashed with bcrypt (10 rounds)
-- [x] JWT with 7-day expiry
-- [x] Protected routes with middleware
-- [x] Role-based access control (woman/employer/admin)
-- [x] Error messages don't expose internals
-- [x] CORS configured for specific origin
-- [ ] In production: use strong 32-char JWT_SECRET
-- [ ] In production: restrict MongoDB Atlas IP to Render's IPs
-
----
-
-## 💡 Job Recommendation Logic
-
-Located in `backend/controllers/jobController.js → getRecommendedJobs`:
-
-```js
-// Fetches user's selected skills
-// Finds jobs where job.skills overlap with user.skills
-// Returns top 6 most recent matches
-```
-
-To improve: add scoring based on skill demand, pay range, and application history.
-
----
-
-## 🧩 Role-Based Access
-
-| Feature | Woman | Employer | Admin |
-|---------|-------|----------|-------|
-| Browse jobs | ✅ | ✅ | ✅ |
-| Apply for jobs | ✅ | ❌ | ✅ |
-| Post jobs | ❌ | ✅ | ✅ |
-| Update app status | ❌ | ✅ | ✅ |
-| Financial dashboard | ✅ | ✅ | ✅ |
-| Create skills | ❌ | ❌ | ✅ |
-
----
-
-## 📦 Tech Stack Summary
-
-| Layer | Technology |
-|-------|-----------|
-| Frontend | React 18 + Vite |
-| Styling | Tailwind CSS |
-| Charts | Recharts |
-| Icons | Lucide React |
-| State | React Context |
-| HTTP | Axios |
-| Router | React Router v6 |
-| Backend | Node.js + Express |
-| Database | MongoDB + Mongoose |
-| Auth | JWT + bcryptjs |
-| Deployment | Vercel (FE) + Render (BE) + Atlas (DB) |
-
----
-
-## 🆘 Troubleshooting
-
-**MongoDB connection fails**
+**Solution:**
 ```bash
-# Make sure MongoDB is running locally:
+# Check if MongoDB is running
 mongod --dbpath /data/db
-# Or check Atlas connection string is correct
+
+# Or verify Atlas connection string
+# Make sure password doesn't contain special characters
 ```
 
-**CORS error in browser**
-```bash
-# Make sure FRONTEND_URL in backend .env matches exactly:
-FRONTEND_URL=http://localhost:5173  # for local
-FRONTEND_URL=https://your-app.vercel.app  # for prod
-```
+</details>
 
-**Token errors / 401 responses**
-```bash
-# Clear localStorage in browser:
+<details>
+<summary><b>❌ CORS Error in Browser</b></summary>
+
+**Solution:**
+- Check `FRONTEND_URL` in backend `.env` matches your frontend URL exactly
+- No trailing slash!
+- Restart backend server after changes
+
+</details>
+
+<details>
+<summary><b>❌ 401 Unauthorized</b></summary>
+
+**Solution:**
+```javascript
+// Clear browser storage
 localStorage.clear()
-# Then log in again
+// Then login again
 ```
 
-**Seed fails**
+</details>
+
+<details>
+<summary><b>❌ Port Already in Use</b></summary>
+
+**Solution:**
 ```bash
-# Make sure backend .env exists with correct MONGO_URI
-# Then:
-cd backend && node seed/seed.js
+# Windows
+netstat -ano | findstr :5000
+taskkill /PID <PID> /F
+
+# Mac/Linux
+lsof -ti:5000 | xargs kill -9
 ```
+
+</details>
 
 ---
 
-*WorkNest Women — When women earn, families grow, and societies progress. 🌸*
+## 🗺️ Roadmap
+
+- [ ] 📧 Email notifications (SendGrid/Mailgun)
+- [ ] 💳 Payment integration (Stripe/Razorpay)
+- [ ] 📱 Mobile app (React Native)
+- [ ] 🎥 Video interviews
+- [ ] 🤖 AI resume builder
+- [ ] 📊 Advanced analytics
+- [ ] 🔔 SMS alerts
+- [ ] 🌍 Multi-language support
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! Please follow these steps:
+
+1. **Fork** the repository
+2. **Create** a feature branch (`git checkout -b feature/amazing-feature`)
+3. **Commit** your changes (`git commit -m 'Add amazing feature'`)
+4. **Push** to the branch (`git push origin feature/amazing-feature`)
+5. **Open** a Pull Request
+
+---
+
+## 📄 License
+
+This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
+
+---
+
+## 💖 Acknowledgments
+
+- Built with ❤️ for women's economic empowerment
+- Inspired by the need for flexible work opportunities
+- Powered by amazing open-source technologies
+
+---
+
+<div align="center">
+
+### 🌸 *When women earn, families grow, and societies progress* 🌸
+
+**Made with 💜 by the WorkNest Team**
+
+[⬆ Back to Top](#-worknest-women)
+
+</div>
