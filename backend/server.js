@@ -16,11 +16,15 @@ const { errorHandler }  = require('./middleware/errorHandler');
 
 const app = express();
 
+// Trust proxy - required for Render/Heroku/etc
+app.set('trust proxy', 1);
+
 // Security headers
 app.use(helmet());
 
 // CORS — support comma-separated list of allowed origins
-const allowedOrigins = (process.env.FRONTEND_URL || 'http://localhost:5173')
+const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:5173';
+const allowedOrigins = frontendUrl
   .split(',')
   .map(o => o.trim());
 
@@ -30,14 +34,17 @@ app.use(cors({
     if (!origin) return cb(null, true);
     
     // Allow localhost/127.0.0.1 for development and seeding
-    if (origin.includes('localhost') || origin.includes('127.0.0.1')) {
+    if (origin.startsWith('http://localhost') || origin.startsWith('http://127.0.0.1')) {
       return cb(null, true);
     }
     
     // Allow configured origins
-    if (allowedOrigins.includes(origin)) return cb(null, true);
+    if (allowedOrigins.some(o => origin === o || origin.startsWith(o))) {
+      return cb(null, true);
+    }
     
     // Reject others
+    console.warn(`CORS blocked: ${origin} (allowed: ${allowedOrigins.join(', ')})`);
     cb(new Error(`CORS: origin ${origin} not allowed`));
   },
   credentials: true,
