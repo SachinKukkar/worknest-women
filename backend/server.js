@@ -11,6 +11,7 @@ const jobRoutes         = require('./routes/jobs');
 const applicationRoutes = require('./routes/applications');
 const transactionRoutes = require('./routes/transactions');
 const skillRoutes       = require('./routes/skills');
+const seedRoutes        = require('./routes/seed');
 const { errorHandler }  = require('./middleware/errorHandler');
 
 const app = express();
@@ -30,6 +31,8 @@ app.use(cors({
     cb(new Error(`CORS: origin ${origin} not allowed`));
   },
   credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
 }));
 
 app.use(express.json({ limit: '10kb' }));
@@ -59,6 +62,7 @@ app.use('/api/jobs',         jobRoutes);
 app.use('/api/applications', applicationRoutes);
 app.use('/api/transactions', transactionRoutes);
 app.use('/api/skills',       skillRoutes);
+app.use('/api/seed',         seedRoutes);
 
 // Health check
 app.get('/api/health', (req, res) =>
