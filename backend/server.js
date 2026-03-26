@@ -26,8 +26,18 @@ const allowedOrigins = (process.env.FRONTEND_URL || 'http://localhost:5173')
 
 app.use(cors({
   origin: (origin, cb) => {
-    // allow server-to-server / curl (no origin) in dev
-    if (!origin || allowedOrigins.includes(origin)) return cb(null, true);
+    // Allow requests with no origin (mobile apps, curl, Postman)
+    if (!origin) return cb(null, true);
+    
+    // Allow localhost/127.0.0.1 for development and seeding
+    if (origin.includes('localhost') || origin.includes('127.0.0.1')) {
+      return cb(null, true);
+    }
+    
+    // Allow configured origins
+    if (allowedOrigins.includes(origin)) return cb(null, true);
+    
+    // Reject others
     cb(new Error(`CORS: origin ${origin} not allowed`));
   },
   credentials: true,
